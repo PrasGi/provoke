@@ -1,0 +1,4 @@
+$ grep '"strict": true' tsconfig.json
+    "strict": true,
+$ grep '"noUncheckedIndexedAccess": true' tsconfig.json
+    "noUncheckedIndexedAccess": true,

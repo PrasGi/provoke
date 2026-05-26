@@ -1,0 +1,47 @@
+{
+  "app": {
+    "title": "Provoke",
+    "tagline": "Berpikir lebih dalam. Bicara lebih berani."
+  },
+  "home": {
+    "level": {
+      "label": "Level",
+      "easy": "Mudah",
+      "medium": "Sedang",
+      "hard": "Sulit",
+      "all": "Semua Level"
+    },
+    "timer": {
+      "label": "Timer",
+      "1min": "1 menit",
+      "2min": "2 menit",
+      "3min": "3 menit",
+      "free": "Bebas"
+    },
+    "start": "Mulai",
+    "cards_available": "{{count}} pertanyaan tersedia",
+    "categories": {
+      "label": "Kategori",
+      "select_all": "Pilih Semua",
+      "clear": "Hapus"
+    }
+  },
+  "play": {
+    "hint": "Petunjuk",
+    "reveal": "Buka Perspektif",
+    "next": "Kartu Berikutnya",
+    "finish": "Selesai",
+    "perspective_title": "Perspektif"
+  },
+  "finished": {
+    "title": "Sesi Selesai",
+    "cards_played": "Kamu menjelajahi {{count}} pertanyaan",
+    "play_again": "Main Lagi"
+  },
+  "lang": {
+    "toggle": {
+      "en": "EN",
+      "id": "ID"
+    }
+  }
+}
