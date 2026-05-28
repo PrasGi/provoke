@@ -1,11 +1,13 @@
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Brand } from '../components/Brand';
 import { LanguageToggle } from '../components/LanguageToggle';
 import { CategoryGrid } from '../components/CategoryGrid';
+import { Tutorial } from '../components/Tutorial';
 import { Button } from '../components/ui/button';
 import { useGameStore } from '../store/game.store';
-import { readSettings, writeSettings } from '../store/persist';
+import { readSettings, writeSettings, writeTutorialSeen } from '../store/persist';
+import { STORAGE_KEYS } from '../store/keys';
 import { QUESTIONS } from '../data/questions.generated';
 import { getFusionName } from '../data/categoryVisuals';
 import { useOptionalTheme } from '../three/theme-context';
@@ -30,6 +32,13 @@ export function HomeScreen() {
   const [selected, setSelected] = useState<CategoryId[]>([]);
   const [level, setLevel] = useState<Level | 'all'>('all');
   const [timerDur, setTimerDur] = useState<number>(0);
+  const [showTutorial, setShowTutorial] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem(STORAGE_KEYS.tutorial)) {
+      setShowTutorial(true);
+    }
+  }, []);
 
   const levels = [
     { key: 'all' as const, label: t('home.level.all') },
@@ -65,83 +74,103 @@ export function HomeScreen() {
     start(selected, level, timerDur);
   };
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-start px-4 pt-10 pb-20 gap-10 max-w-xl mx-auto">
-      <div className="w-full flex items-center justify-between">
-        <Brand />
-        <LanguageToggle />
-      </div>
+  const handleTutorialClose = () => {
+    writeTutorialSeen(true);
+    setShowTutorial(false);
+  };
 
-      <div className="w-full flex flex-col gap-3">
-        <SectionLabel>{t('home.categories.label')}</SectionLabel>
-        <CategoryGrid selected={selected} onChange={handleCategoryChange} />
-        {selected.length > 1 && (
-          <div className="category-fusion-label">
-            <span className="flex items-center gap-2">
-              <span className="text-primary/60 text-xs">✦</span>
-              <span>Fusion</span>
+  return (
+    <>
+      <div className="min-h-screen flex flex-col items-center justify-start px-4 pt-10 pb-20 gap-10 max-w-xl mx-auto">
+        <div className="w-full flex items-center justify-between">
+          <Brand />
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setShowTutorial(true)}
+              className="provoke-button w-8 h-8 rounded-full flex items-center justify-center text-white/40 hover:text-white/80 border border-white/10 hover:border-white/25 text-sm font-semibold transition-colors"
+              aria-label={t('tutorial.button')}
+              title={t('tutorial.button')}
+            >
+              ?
+            </button>
+            <LanguageToggle />
+          </div>
+        </div>
+
+        <div className="w-full flex flex-col gap-3" data-tutorial="categories">
+          <SectionLabel>{t('home.categories.label')}</SectionLabel>
+          <CategoryGrid selected={selected} onChange={handleCategoryChange} />
+          {selected.length > 1 && (
+            <div className="category-fusion-label">
+              <span className="flex items-center gap-2">
+                <span className="text-primary/60 text-xs">✦</span>
+                <span>Fusion</span>
+              </span>
+              <strong>{fusionName}</strong>
+            </div>
+          )}
+        </div>
+
+        <div className="w-full flex flex-col gap-3" data-tutorial="settings">
+          <SectionLabel>{t('home.level.label')}</SectionLabel>
+          <div className="flex rounded-xl bg-black/30 border border-white/8 backdrop-blur-sm p-1 gap-0.5">
+            {levels.map(({ key, label }) => (
+              <button
+                type="button"
+                key={key}
+                onClick={() => setLevel(key)}
+                className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium ${
+                  level === key
+                    ? 'bg-gradient-to-b from-white/15 to-white/8 text-white border border-white/20 shadow-[0_0_12px_oklch(0.72_0.13_70_/_0.15)]'
+                    : 'text-white/40 hover:text-white/65 hover:bg-white/6'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="w-full flex flex-col gap-3">
+          <SectionLabel>{t('home.timer.label')}</SectionLabel>
+          <div className="flex rounded-xl bg-black/30 border border-white/8 backdrop-blur-sm p-1 gap-0.5">
+            {timers.map(({ label, value }) => (
+              <button
+                type="button"
+                key={value}
+                onClick={() => setTimerDur(value)}
+                className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium ${
+                  timerDur === value
+                    ? 'bg-gradient-to-b from-white/15 to-white/8 text-white border border-white/20 shadow-[0_0_12px_oklch(0.72_0.13_70_/_0.15)]'
+                    : 'text-white/40 hover:text-white/65 hover:bg-white/6'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {selected.length > 0 && (
+          <div className="-mt-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/8 text-xs text-white/50">
+              {t('home.cards_available', { count: availableCount })}
             </span>
-            <strong>{fusionName}</strong>
           </div>
         )}
+
+        <Button
+          type="button"
+          data-tutorial="gameplay"
+          className={`w-full py-5 text-base font-semibold ${canStart ? 'shadow-[0_0_28px_oklch(0.72_0.13_70_/_0.35)]' : ''}`}
+          disabled={!canStart}
+          onClick={handleStart}
+        >
+          {t('home.start')}
+        </Button>
       </div>
-
-      <div className="w-full flex flex-col gap-3">
-        <SectionLabel>{t('home.level.label')}</SectionLabel>
-        <div className="flex rounded-xl bg-black/30 border border-white/8 backdrop-blur-sm p-1 gap-0.5">
-          {levels.map(({ key, label }) => (
-            <button
-              type="button"
-              key={key}
-              onClick={() => setLevel(key)}
-              className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium ${
-                level === key
-                  ? 'bg-gradient-to-b from-white/15 to-white/8 text-white border border-white/20 shadow-[0_0_12px_oklch(0.72_0.13_70_/_0.15)]'
-                  : 'text-white/40 hover:text-white/65 hover:bg-white/6'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="w-full flex flex-col gap-3">
-        <SectionLabel>{t('home.timer.label')}</SectionLabel>
-        <div className="flex rounded-xl bg-black/30 border border-white/8 backdrop-blur-sm p-1 gap-0.5">
-          {timers.map(({ label, value }) => (
-            <button
-              type="button"
-              key={value}
-              onClick={() => setTimerDur(value)}
-              className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium ${
-                timerDur === value
-                  ? 'bg-gradient-to-b from-white/15 to-white/8 text-white border border-white/20 shadow-[0_0_12px_oklch(0.72_0.13_70_/_0.15)]'
-                  : 'text-white/40 hover:text-white/65 hover:bg-white/6'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {selected.length > 0 && (
-        <div className="-mt-4">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/8 text-xs text-white/50">
-            {t('home.cards_available', { count: availableCount })}
-          </span>
-        </div>
-      )}
-
-      <Button
-        type="button"
-        className={`w-full py-5 text-base font-semibold ${canStart ? 'shadow-[0_0_28px_oklch(0.72_0.13_70_/_0.35)]' : ''}`}
-        disabled={!canStart}
-        onClick={handleStart}
-      >
-        {t('home.start')}
-      </Button>
-    </div>
+      {showTutorial && <Tutorial onClose={handleTutorialClose} />}
+    </>
   );
 }

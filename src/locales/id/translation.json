@@ -128,5 +128,31 @@
       "en": "EN",
       "id": "ID"
     }
+  },
+  "tutorial": {
+    "button": "Cara bermain",
+    "step_of": "{{current}} dari {{total}}",
+    "next": "Lanjut",
+    "back": "Kembali",
+    "done": "Mengerti!",
+    "skip": "Lewati",
+    "steps": {
+      "categories": {
+        "title": "Pilih Kategorimu",
+        "body": "Pilih satu atau lebih kategori yang ingin kamu jelajahi. Setiap kategori memiliki atmosfer 3D unik yang muncul di latar belakang."
+      },
+      "fusion": {
+        "title": "Mode Fusion",
+        "body": "Pilih 2 atau lebih kategori untuk mengaktifkan Mode Fusion — latar 3D akan berpadu dan nama fusion unik akan muncul."
+      },
+      "settings": {
+        "title": "Level & Timer",
+        "body": "Pilih tingkat kesulitan untuk menyaring pertanyaan, dan atur timer opsional agar diskusi terus bergerak."
+      },
+      "gameplay": {
+        "title": "Cara Bermain Kartu",
+        "body": "Setiap kartu menampilkan pertanyaan yang memancing pikiran. Ketuk 'Petunjuk' jika butuh dorongan, lalu 'Ungkap Perspektif' untuk sudut pandang baru. Tekan 'Kartu Berikutnya' untuk melanjutkan."
+      }
+    }
   }
 }

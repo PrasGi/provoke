@@ -86,3 +86,13 @@ export function writeLang(lang: Lang): void {
 export function migrateIfNeeded(): void {
   // v1: no migration needed — this is the initial schema
 }
+
+const TutorialSeenSchema = z.boolean().default(false);
+
+export function readTutorialSeen(): boolean {
+  return safeRead(STORAGE_KEYS.tutorial, TutorialSeenSchema, false);
+}
+
+export function writeTutorialSeen(seen: boolean): void {
+  localStorage.setItem(STORAGE_KEYS.tutorial, JSON.stringify(seen));
+}

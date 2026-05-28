@@ -122,5 +122,31 @@
       "en": "EN",
       "id": "ID"
     }
+  },
+  "tutorial": {
+    "button": "How to play",
+    "step_of": "{{current}} of {{total}}",
+    "next": "Next",
+    "back": "Back",
+    "done": "Got it!",
+    "skip": "Skip",
+    "steps": {
+      "categories": {
+        "title": "Pick Your Categories",
+        "body": "Select one or more categories you want to explore. Each category has its own unique 3D atmosphere that appears in the background."
+      },
+      "fusion": {
+        "title": "Fusion Mode",
+        "body": "Select 2 or more categories to activate Fusion Mode — the 3D backgrounds blend together and a unique fusion name appears."
+      },
+      "settings": {
+        "title": "Level & Timer",
+        "body": "Choose a difficulty level to filter questions, and optionally set a timer to keep the conversation moving."
+      },
+      "gameplay": {
+        "title": "How to Play a Card",
+        "body": "Each card shows a thought-provoking question. Tap 'Hint' if you need a nudge, then 'Reveal Perspective' to see a new angle. Hit 'Next Card' to continue."
+      }
+    }
   }
 }

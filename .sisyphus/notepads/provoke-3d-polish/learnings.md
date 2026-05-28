@@ -75,3 +75,28 @@
 ### index.css — .category-fusion-label gradient border
 - `border: 1px solid transparent` + `background-clip: padding-box` + `box-shadow: 0 0 0 1px oklch(0.72 0.13 70 / 20%)` = gradient border effect using box-shadow trick
 - Inset highlight: `inset 0 1px 0 oklch(1 0 0 / 8%)` — subtle top edge catch light
+
+## [Task: Tutorial system]
+
+### Architecture
+- `Tutorial.tsx`: standalone spotlight overlay component — no external state management
+- `STEPS` array uses `titleKey` as React key (stable, unique, avoids array-index-key lint error)
+- `spotlightRect` derived from `getBoundingClientRect()` on `[data-tutorial="xxx"]` elements
+- Backdrop click: `onClick={(e) => e.target === e.currentTarget && handleNext()}` — avoids onClick on static child divs (no jsx-a11y in this project's ESLint config, but keeps clean pattern)
+- Escape key: window-level `keydown` listener in `useEffect`, cleans up on unmount
+- `useEffect` dep array: `[currentStep]` only — `step` is redundant since `currentStep = STEPS[step]` always changes with step
+
+### Test Mock Gotcha (CRITICAL)
+- `HomeScreen.test.tsx` mocks `../../store/persist` with ONLY `readSettings` + `writeSettings`
+- Vitest v4 factory mocks throw `No "X" export is defined on mock` when any unlisted export is CALLED
+- Solution: use `localStorage.getItem(STORAGE_KEYS.tutorial)` directly in HomeScreen's useEffect instead of calling `readTutorialSeen()` — functionally equivalent, avoids the mock proxy guard
+- `writeTutorialSeen` is still imported from persist in HomeScreen (used in `handleTutorialClose`) but is never called by existing tests → no issue
+- Rule: any new persist functions used in components with existing test mocks must either be added to the mock OR worked around with direct localStorage access
+
+### CSS
+- `tutorial-spotlight` box-shadow trick: `box-shadow: 0 0 0 9999px oklch(...)` = global dim with spotlight cutout
+- `tutorial-tooltip` animation: `animation: tutorial-tooltip-in` uses `translateX(-50%)` which matches the `left: 50%, transform: translateX(-50%)` positioning for bottom/top tooltips
+- Pre-existing CSS lint errors (lines 6,8,36,45,48 in index.css): Tailwind-specific syntax flagged by CSS linter — these are EXPECTED and pre-date this task
+
+### Locales
+- Tutorial strings added after `"lang"` key in both en and id JSON files — JSON structure requires trailing comma on `"lang"` block
