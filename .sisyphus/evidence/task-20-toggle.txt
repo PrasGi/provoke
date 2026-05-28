@@ -1,0 +1,3 @@
+T20 toggle verification
+
+TypeScript check passed: `npx tsc --noEmit` exited 0.

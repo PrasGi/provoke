@@ -1,0 +1,2 @@
+npx tsc --noEmit: passed with exit code 0
+bunx vitest run src/three/__tests__/Scene.test.tsx: passed (2 tests, 2 passed)

@@ -1,0 +1,8 @@
+<title>Provoke</title>
+.sisyphus/evidence/task-31-walkthrough.md  2.0K
+### `src/main.tsx`
+### `src/App.tsx`
+- Uses `ScreenSwitcher` to render `HomeScreen`, `PlayingScreen`, or `FinishedScreen` from the discriminated `state.screen` value.
+### `src/screens/HomeScreen.tsx`
+### `src/screens/PlayingScreen.tsx`
+### `src/screens/FinishedScreen.tsx`

@@ -1,0 +1,1 @@
+Scene fallback verified: tier none renders gradient div, no Canvas mounted, aria-hidden and role present

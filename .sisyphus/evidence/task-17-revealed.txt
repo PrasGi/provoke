@@ -1,0 +1,13 @@
+=== npx tsc --noEmit ===
+(exit 0 - no output means success)
+
+=== bunx vitest run src/components/__tests__/Card.test.tsx ===
+
+ RUN  v4.1.7 /Users/macbook/workspace/personal/provoke-web
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  00:49:03
+   Duration  783ms (transform 48ms, setup 56ms, import 127ms, tests 93ms, environment 430ms)
+

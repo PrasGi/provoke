@@ -1,0 +1,28 @@
+## F1 local compliance greps final rerun
+
+### as Question\[\] in src
+PASS no matches for as Question\[\]
+
+### as any in src
+PASS no matches for as any
+
+### fonts.googleapis.com in package.json index.html src public docs README.md
+PASS no matches for fonts.googleapis.com
+
+### tailwindcss-animate in package.json src
+PASS no matches for tailwindcss-animate
+
+### @testing-library/react in src/three
+PASS no matches for @testing-library/react
+
+### score|points|streak|leaderboard in src
+PASS no matches for score|points|streak|leaderboard
+
+### service-worker|workbox|sw\.js in package.json index.html src public docs README.md
+PASS no matches for service-worker|workbox|sw\.js
+
+### DepthOfField in src/three
+PASS no matches for DepthOfField
+
+### dpr=\{\[1,[[:space:]]*2\]\} in src
+PASS no matches for dpr=\{\[1,[[:space:]]*2\]\}

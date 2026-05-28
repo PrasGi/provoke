@@ -1,0 +1,17 @@
+No 'as any' anywhere in src/:
+PASS
+
+Lint + format + Vitest + TypeScript:
+$ eslint .
+$ node scripts/format.mjs --check
+Checking formatting...
+All matched files use Prettier code style!
+
+ RUN  v4.1.7 /Users/macbook/workspace/personal/provoke-web
+
+
+ Test Files  19 passed (19)
+      Tests  102 passed (102)
+   Start at  13:51:01
+   Duration  2.92s (transform 894ms, setup 1.01s, import 2.72s, tests 2.16s, environment 10.67s)
+

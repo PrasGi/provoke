@@ -1,0 +1,4 @@
+T20 brand verification
+
+Vitest check passed: `bunx vitest run src/components/__tests__/LanguageToggle.test.tsx`
+Result: 1 file passed, 4 tests passed.

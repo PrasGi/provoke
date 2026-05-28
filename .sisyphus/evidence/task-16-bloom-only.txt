@@ -1,0 +1,18 @@
+## Task 16: PostFX Bloom-Only Verification
+
+### tsc --noEmit
+Command: npx tsc --noEmit
+Output: (none)
+Exit code: 0 — PASS
+
+### Forbidden effects grep
+Command: grep -rn "DepthOfField|Noise|Vignette" src/three/
+Output: (none)
+Exit code: 1 (no matches) — PASS
+
+### File created
+src/three/postprocessing.tsx — exports PostFX component
+- Returns null for tier === 'none' || tier === 'low'
+- Bloom at 60% intensity for 'medium' tier
+- Bloom at full theme.bloomIntensity for 'high' tier
+- Only imports: EffectComposer, Bloom from @react-three/postprocessing

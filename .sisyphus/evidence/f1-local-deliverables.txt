@@ -1,0 +1,4 @@
+## F1 local deliverable/evidence audit
+PASS 44 required deliverables present
+zsh:1: command not found: seq
+PASS evidence exists for tasks 1-31

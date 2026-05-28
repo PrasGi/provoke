@@ -1,0 +1,16 @@
+Command: bun run prebuild
+Result: passed
+Output:
+$ bun run csv:validate && tsx scripts/parse-csv.ts
+$ node scripts/validate-csv.mjs
+CSV validation passed: 315 questions
+Generated 315 questions → /Users/macbook/workspace/personal/provoke-web/src/data/questions.generated.ts
+
+Command: bunx vitest run src/data/__tests__/questions.test.ts
+Result: passed
+Output:
+Test Files  1 passed (1)
+Tests  5 passed (5)
+
+Command: npx tsc --noEmit
+Result: passed

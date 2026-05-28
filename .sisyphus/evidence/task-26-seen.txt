@@ -1,0 +1,3 @@
+npx tsc --noEmit: exit 0
+bunx vitest run src/store/__tests__/sync.test.ts: 6 passed
+lsp_diagnostics: no errors on src/App.tsx, src/store/sync.ts, src/store/__tests__/sync.test.ts

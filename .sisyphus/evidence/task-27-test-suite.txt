@@ -1,0 +1,9 @@
+bunx vitest run 2>&1
+
+Test Files  18 passed (18)
+Tests       96 passed (96)
+
+Required test files: all 18 present
+Skipped tests: none found with rg -n "(it|test|describe)\.skip" src/
+Vitest config: existing and correct
+Vitest setup: existing and correct

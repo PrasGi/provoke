@@ -2,9 +2,10 @@
 
 ## TL;DR
 
-> **Quick Summary**: Greenfield rebuild of the `thinkdeck_game.html` vanilla-JS prototype as a polished React 19 + TypeScript app called **Provoke**. The differentiator from the prototype is *the UI itself*: cinematic dark theme with category-themed 3D particle backgrounds (react-three-fiber), bilingual EN/ID content, 21 categories × 3 levels × ~5–10 seed questions, glass-morphism cards with Y-axis flip on perspective reveal.
+> **Quick Summary**: Greenfield rebuild of the `thinkdeck_game.html` vanilla-JS prototype as a polished React 19 + TypeScript app called **Provoke**. The differentiator from the prototype is _the UI itself_: cinematic dark theme with category-themed 3D particle backgrounds (react-three-fiber), bilingual EN/ID content, 21 categories × 3 levels × ~5–10 seed questions, glass-morphism cards with Y-axis flip on perspective reveal.
 >
 > **Deliverables**:
+>
 > - Vite + React 19 + TypeScript (strict + `noUncheckedIndexedAccess`) scaffold
 > - Tailwind CSS v4 + shadcn/ui (with `tw-animate-css`)
 > - react-three-fiber + @react-three/drei + @react-three/postprocessing scene
@@ -27,7 +28,9 @@
 ## Context
 
 ### Original Request
+
 Prototype file `/Users/macbook/Downloads/thinkdeck_game.html` is a 274-line vanilla-JS single-file card game with 12 cards across 9 categories. User wants to rebuild it as a React app with:
+
 - Bilingual (EN default + ID)
 - 21 categories × 3 levels × 50 questions target (3,150 max; seed 5–10 per cat/level now)
 - 3D particle backgrounds that retheme per category — "UI is the most important"
@@ -37,6 +40,7 @@ Prototype file `/Users/macbook/Downloads/thinkdeck_game.html` is a 274-line vani
 ### Interview Summary
 
 **Key Discussions**:
+
 - Toolchain → Vite + React 19 + TypeScript strict
 - 3D → react-three-fiber + drei + postprocessing
 - Styling → Tailwind CSS v4 + shadcn/ui (using `tw-animate-css`, not `tailwindcss-animate`)
@@ -51,6 +55,7 @@ Prototype file `/Users/macbook/Downloads/thinkdeck_game.html` is a 274-line vani
 - UI direction → dark/cinematic/immersive, flowing constellation/dust particles, glass card with backdrop-blur, Inter (UI) + Instrument Serif (questions), subtle transitions, skip onboarding, grid of 21 chips, card flip Y-axis, mobile-first responsive, "Provoke" wordmark
 
 **Research Findings**:
+
 - Workspace `/Users/macbook/workspace/personal/provoke-web/` is empty — greenfield.
 - Prototype FSM ports cleanly. Empty-deck crash bug exists in prototype (must guard with discriminated union).
 - iOS WebGL DPR > 1 causes silent context loss — hard-code `dpr={[1, 1]}` in Canvas.
@@ -59,6 +64,7 @@ Prototype file `/Users/macbook/Downloads/thinkdeck_game.html` is a 274-line vani
 ### Metis Review
 
 **Identified Gaps** (addressed):
+
 - ~~21 categories undefined~~ → user provided full locked list
 - ~~CSV column collision (`id` vs `question_id`)~~ → renamed columns: `qid`, `q_en`, `q_id`, `hint_en`, `hint_id`, `persp_en`, `persp_id`
 - ~~Seen-card semantics undefined~~ → "seen" = perspective revealed; per-category tracking; reshuffle when exhausted
@@ -77,9 +83,11 @@ Prototype file `/Users/macbook/Downloads/thinkdeck_game.html` is a 274-line vani
 ## Work Objectives
 
 ### Core Objective
+
 Deliver a production-quality, UI-first React rebuild of the ThinkDeck prototype as "Provoke" — featuring cinematic 3D particle backgrounds that retheme per category, bilingual content (EN/ID), and a polished glass-card interaction loop, with infrastructure designed for content expansion (target 3,150 questions, seed ~315–630).
 
 ### Concrete Deliverables
+
 - `package.json` (Vite, React 19, TypeScript, Tailwind v4, shadcn/ui, R3F, i18next, Vitest, Zod, fontsource)
 - `vite.config.ts` + `tsconfig.json` (strict, `noUncheckedIndexedAccess`)
 - `tailwind.config.ts` + `src/index.css` (dark theme tokens, Tailwind v4 CSS-first config)
@@ -110,6 +118,7 @@ Deliver a production-quality, UI-first React rebuild of the ThinkDeck prototype 
 - `README.md` (setup, dev, build, content editing)
 
 ### Definition of Done
+
 - [ ] `bun install` (or `npm install`) completes with zero peer-dep errors
 - [ ] `bun run build` exits 0 (or `npm run build`)
 - [ ] `npx tsc --noEmit` exits 0
@@ -125,6 +134,7 @@ Deliver a production-quality, UI-first React rebuild of the ThinkDeck prototype 
 - [ ] User gives explicit "okay" after reviewing F1–F4 output
 
 ### Must Have
+
 - React 19 + TypeScript strict + `noUncheckedIndexedAccess`
 - Tailwind CSS v4 + shadcn/ui + `tw-animate-css`
 - react-three-fiber Canvas with `dpr={[1,1]}` + `aria-hidden="true"` + WebGL context-loss handler
@@ -143,6 +153,7 @@ Deliver a production-quality, UI-first React rebuild of the ThinkDeck prototype 
 - Static build deployable to Vercel/Netlify (zero runtime API calls)
 
 ### Must NOT Have (Guardrails)
+
 - ❌ NO score / points / streak / leaderboard / social sharing
 - ❌ NO backend / API endpoint / WebSocket / auth / cloud sync at runtime
 - ❌ NO 22nd category added at runtime; no theme editor; no user theme overrides
@@ -173,12 +184,14 @@ Deliver a production-quality, UI-first React rebuild of the ThinkDeck prototype 
 > **ZERO HUMAN INTERVENTION** — ALL verification is agent-executed. Acceptance criteria requiring "user manually tests/confirms" are FORBIDDEN.
 
 ### Test Decision
+
 - **Infrastructure exists**: NO (greenfield)
 - **Automated tests**: YES (Tests-after) using **Vitest**
 - **Framework**: `vitest` + `@testing-library/react` for DOM + `@react-three/test-renderer` + `vitest-canvas-mock` for R3F
 - **Coverage focus**: pure logic (FSM, CSV parser, i18n fallback, localStorage migration, theme exhaustiveness, quality-tier detection). UI components verified by static analysis + render-snapshot tests where useful.
 
 ### QA Policy (per AGENTS.md)
+
 Every task includes agent-executed QA scenarios. **Playwright is OFF** by default — F3 reviewer wave uses **static code analysis only**. Evidence saved to `.sisyphus/evidence/task-{N}-{scenario-slug}.{ext}`.
 
 - **Library/Logic**: `bun test` / `vitest run <path>` — assert outputs
@@ -256,54 +269,54 @@ Max Concurrent: 7 (Wave 1)
 
 ### Dependency Matrix
 
-| Task | Depends On | Blocks |
-|---|---|---|
-| 1 | — | 2, 3, 4, 5, 6, 7 (everything) |
-| 2 | 1 | 3, 8, 9, 10, 11, 14, 15, 17, 18, 22, 23, 25 |
-| 3 | 1, 2 | 8, 10, 18, 21, 22 |
-| 4 | 1 | 5, 17, 18, 19, 20, 22, 23 |
-| 5 | 1, 4 | 17, 20, 22, 23 |
-| 6 | 1 | 20, 21, 22, 23, 25, 27 |
-| 7 | 1, 2 | 26, 27 |
-| 8 | 2, 3 | 9 |
-| 9 | 2, 3, 8 | 23, 25, 27 |
-| 10 | 2, 3 | 11, 15, 18 |
-| 11 | 2, 10 | 15, 17, 18, 22, 23, 25 |
-| 12 | 1 | 13, 15, 16, 17 |
-| 13 | 12 | 15, 16, 25 |
-| 14 | 2, 9 | 23, 25, 27 |
-| 15 | 2, 11, 12, 13 | 16, 25 |
-| 16 | 12, 13, 15 | 25 |
-| 17 | 2, 4, 5, 11, 12 | 23 |
-| 18 | 3, 4, 11, 21 | 22 |
-| 19 | 4 | 23 |
-| 20 | 4, 5, 6 | 22, 25 |
-| 21 | 3, 6 | 18, 22 |
-| 22 | 3, 4, 5, 6, 11, 18, 20, 21 | 25 |
-| 23 | 2, 4, 5, 6, 9, 11, 14, 17, 19 | 25 |
-| 24 | 4, 6 | 25 |
-| 25 | 6, 11, 13, 14, 16, 20, 22, 23, 24 | 26, 27, 31 |
-| 26 | 7, 14, 25 | 27, 31 |
-| 27 | 6, 7, 9, 14, 25, 26 | 30, 31 |
-| 28 | 25, 26 | F1, F4 |
-| 29 | 1, 25 | F1 |
-| 30 | 27 | F2 |
-| 31 | 25, 26, 27 | F1, F3 |
-| F1 | All | user okay |
-| F2 | All | user okay |
-| F3 | All | user okay |
-| F4 | All | user okay |
+| Task | Depends On                        | Blocks                                      |
+| ---- | --------------------------------- | ------------------------------------------- |
+| 1    | —                                 | 2, 3, 4, 5, 6, 7 (everything)               |
+| 2    | 1                                 | 3, 8, 9, 10, 11, 14, 15, 17, 18, 22, 23, 25 |
+| 3    | 1, 2                              | 8, 10, 18, 21, 22                           |
+| 4    | 1                                 | 5, 17, 18, 19, 20, 22, 23                   |
+| 5    | 1, 4                              | 17, 20, 22, 23                              |
+| 6    | 1                                 | 20, 21, 22, 23, 25, 27                      |
+| 7    | 1, 2                              | 26, 27                                      |
+| 8    | 2, 3                              | 9                                           |
+| 9    | 2, 3, 8                           | 23, 25, 27                                  |
+| 10   | 2, 3                              | 11, 15, 18                                  |
+| 11   | 2, 10                             | 15, 17, 18, 22, 23, 25                      |
+| 12   | 1                                 | 13, 15, 16, 17                              |
+| 13   | 12                                | 15, 16, 25                                  |
+| 14   | 2, 9                              | 23, 25, 27                                  |
+| 15   | 2, 11, 12, 13                     | 16, 25                                      |
+| 16   | 12, 13, 15                        | 25                                          |
+| 17   | 2, 4, 5, 11, 12                   | 23                                          |
+| 18   | 3, 4, 11, 21                      | 22                                          |
+| 19   | 4                                 | 23                                          |
+| 20   | 4, 5, 6                           | 22, 25                                      |
+| 21   | 3, 6                              | 18, 22                                      |
+| 22   | 3, 4, 5, 6, 11, 18, 20, 21        | 25                                          |
+| 23   | 2, 4, 5, 6, 9, 11, 14, 17, 19     | 25                                          |
+| 24   | 4, 6                              | 25                                          |
+| 25   | 6, 11, 13, 14, 16, 20, 22, 23, 24 | 26, 27, 31                                  |
+| 26   | 7, 14, 25                         | 27, 31                                      |
+| 27   | 6, 7, 9, 14, 25, 26               | 30, 31                                      |
+| 28   | 25, 26                            | F1, F4                                      |
+| 29   | 1, 25                             | F1                                          |
+| 30   | 27                                | F2                                          |
+| 31   | 25, 26, 27                        | F1, F3                                      |
+| F1   | All                               | user okay                                   |
+| F2   | All                               | user okay                                   |
+| F3   | All                               | user okay                                   |
+| F4   | All                               | user okay                                   |
 
 ### Agent Dispatch Summary
 
-| Wave | Count | Assignments |
-|---|---|---|
-| 1 | 7 | T1–T7 → `quick` |
-| 2 | 7 | T8 → `unspecified-high`, T9 → `unspecified-high`, T10 → `visual-engineering`, T11 → `quick`, T12 → `quick`, T13 → `unspecified-high`, T14 → `deep` |
-| 3 | 7 | T15 → `visual-engineering`, T16 → `visual-engineering`, T17 → `visual-engineering`, T18 → `visual-engineering`, T19 → `quick`, T20 → `quick`, T21 → `quick` |
-| 4 | 6 | T22 → `visual-engineering`, T23 → `deep`, T24 → `quick`, T25 → `deep`, T26 → `unspecified-high`, T27 → `unspecified-high` |
-| 5 | 4 | T28 → `writing`, T29 → `quick`, T30 → `unspecified-high`, T31 → `unspecified-high` |
-| FINAL | 4 | F1 → `oracle`, F2 → `unspecified-high`, F3 → `unspecified-high`, F4 → `deep` |
+| Wave  | Count | Assignments                                                                                                                                                 |
+| ----- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1     | 7     | T1–T7 → `quick`                                                                                                                                             |
+| 2     | 7     | T8 → `unspecified-high`, T9 → `unspecified-high`, T10 → `visual-engineering`, T11 → `quick`, T12 → `quick`, T13 → `unspecified-high`, T14 → `deep`          |
+| 3     | 7     | T15 → `visual-engineering`, T16 → `visual-engineering`, T17 → `visual-engineering`, T18 → `visual-engineering`, T19 → `quick`, T20 → `quick`, T21 → `quick` |
+| 4     | 6     | T22 → `visual-engineering`, T23 → `deep`, T24 → `quick`, T25 → `deep`, T26 → `unspecified-high`, T27 → `unspecified-high`                                   |
+| 5     | 4     | T28 → `writing`, T29 → `quick`, T30 → `unspecified-high`, T31 → `unspecified-high`                                                                          |
+| FINAL | 4     | F1 → `oracle`, F2 → `unspecified-high`, F3 → `unspecified-high`, F4 → `deep`                                                                                |
 
 ---
 
@@ -356,6 +369,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `tsconfig.json` contains `"strict": true` AND `"noUncheckedIndexedAccess": true` (grep must find both).
 
   **QA Scenarios**:
+
   ```
   Scenario: Fresh install + build succeeds
     Tool: Bash
@@ -380,17 +394,36 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO (per AGENTS.md, user explicitly requests)
 
-- [ ] 2. **Core type contracts (CategoryId, Level, Phase, Question, GameState, CategoryTheme)**
+- [x] 2. **Core type contracts (CategoryId, Level, Phase, Question, GameState, CategoryTheme)**
 
   **What to do**:
   - Create `src/types/category.ts`:
     ```ts
     export type CategoryId =
-      | 'ethics' | 'philosophy' | 'politics' | 'technology' | 'law'
-      | 'social' | 'economy' | 'life' | 'identity' | 'relationship'
-      | 'education' | 'career' | 'environment' | 'religion' | 'psychology'
-      | 'science' | 'power' | 'future' | 'paradox' | 'local' | 'popculture';
-    export const CATEGORY_IDS: readonly CategoryId[] = [/* same 21, frozen */] as const;
+      | 'ethics'
+      | 'philosophy'
+      | 'politics'
+      | 'technology'
+      | 'law'
+      | 'social'
+      | 'economy'
+      | 'life'
+      | 'identity'
+      | 'relationship'
+      | 'education'
+      | 'career'
+      | 'environment'
+      | 'religion'
+      | 'psychology'
+      | 'science'
+      | 'power'
+      | 'future'
+      | 'paradox'
+      | 'local'
+      | 'popculture';
+    export const CATEGORY_IDS: readonly CategoryId[] = [
+      /* same 21, frozen */
+    ] as const;
     ```
   - Create `src/types/level.ts`: `export type Level = 'easy' | 'medium' | 'hard';`
   - Create `src/types/phase.ts`: `export type Phase = 'thinking' | 'hinted' | 'revealed';`
@@ -412,20 +445,28 @@ Max Concurrent: 7 (Wave 1)
     ```ts
     export type GameState =
       | { screen: 'home' }
-      | { screen: 'playing'; selectedCategories: CategoryId[]; level: Level | 'all';
-          timerDur: number; deck: Question[]; idx: number; phase: Phase;
-          secs: number; running: boolean }
+      | {
+          screen: 'playing';
+          selectedCategories: CategoryId[];
+          level: Level | 'all';
+          timerDur: number;
+          deck: Question[];
+          idx: number;
+          phase: Phase;
+          secs: number;
+          running: boolean;
+        }
       | { screen: 'finished'; totalSeen: number };
     ```
   - Create `src/types/theme.ts`:
     ```ts
     export interface CategoryTheme {
       id: CategoryId;
-      colorPrimary: string;     // oklch(...)
+      colorPrimary: string; // oklch(...)
       colorSecondary: string;
       colorAccent: string;
-      particleColor: string;    // hex
-      particleSpeed: number;    // 0..1
+      particleColor: string; // hex
+      particleSpeed: number; // 0..1
       particleDensityMul: number;
       bloomIntensity: number;
       mood: string;
@@ -465,6 +506,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `vitest run src/types` passes.
 
   **QA Scenarios**:
+
   ```
   Scenario: CategoryId is exhaustive over 21 ids
     Tool: Bash (vitest)
@@ -490,7 +532,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 3. **Categories data module (21 locked categories with EN/ID labels)**
+- [x] 3. **Categories data module (21 locked categories with EN/ID labels)**
 
   **What to do**:
   - Create `src/data/categories.ts` exporting `CATEGORIES: readonly CategoryDef[]`.
@@ -498,8 +540,8 @@ Max Concurrent: 7 (Wave 1)
     ```ts
     interface CategoryDef {
       id: CategoryId;
-      label_id: string;   // Indonesian display label
-      label_en: string;   // English display label
+      label_id: string; // Indonesian display label
+      label_en: string; // English display label
       description_id: string;
       description_en: string;
     }
@@ -543,6 +585,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: All 21 categories present with non-empty fields
     Tool: Bash (vitest)
@@ -568,7 +611,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 4. **Tailwind CSS v4 + shadcn/ui init + tw-animate-css**
+- [x] 4. **Tailwind CSS v4 + shadcn/ui init + tw-animate-css**
 
   **What to do**:
   - Install: `tailwindcss@^4`, `@tailwindcss/vite`, `tw-animate-css`, `class-variance-authority`, `clsx`, `tailwind-merge`, `lucide-react`.
@@ -612,6 +655,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] Grep: `rg "tailwindcss-animate" .` returns ZERO matches.
 
   **QA Scenarios**:
+
   ```
   Scenario: Tailwind v4 + tw-animate-css configured
     Tool: Bash
@@ -639,7 +683,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 5. **Self-hosted fonts (@fontsource/inter, @fontsource/instrument-serif) + font wiring**
+- [x] 5. **Self-hosted fonts (@fontsource/inter, @fontsource/instrument-serif) + font wiring**
 
   **What to do**:
   - Install: `@fontsource/inter`, `@fontsource/instrument-serif` (variable subsets if available, otherwise weights 400/500/600).
@@ -652,8 +696,8 @@ Max Concurrent: 7 (Wave 1)
     ```
   - Add font-family CSS variables to `src/index.css` `@theme`:
     ```css
-    --font-sans: "Inter", system-ui, sans-serif;
-    --font-serif: "Instrument Serif", Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
     ```
   - Set `body { font-family: var(--font-sans); }` in base layer.
 
@@ -688,6 +732,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `bun run build` produces font files in `dist/assets/`.
 
   **QA Scenarios**:
+
   ```
   Scenario: Fonts self-hosted, no Google CDN
     Tool: Bash
@@ -713,11 +758,12 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 6. **i18next setup + EN/ID translation skeletons (UI strings only)**
+- [x] 6. **i18next setup + EN/ID translation skeletons (UI strings only)**
 
   **What to do**:
   - Install: `i18next`, `react-i18next`, `i18next-browser-languagedetector`.
   - Create `src/i18n/index.ts`:
+
     ```ts
     import i18n from 'i18next';
     import { initReactI18next } from 'react-i18next';
@@ -725,16 +771,20 @@ Max Concurrent: 7 (Wave 1)
     import en from '../../public/locales/en/translation.json';
     import id from '../../public/locales/id/translation.json';
 
-    i18n.use(LanguageDetector).use(initReactI18next).init({
-      resources: { en: { translation: en }, id: { translation: id } },
-      fallbackLng: 'en',
-      supportedLngs: ['en', 'id'],
-      saveMissing: false,
-      interpolation: { escapeValue: false },
-      detection: { order: ['localStorage', 'navigator'], lookupLocalStorage: 'provoke_v1_lang' },
-    });
+    i18n
+      .use(LanguageDetector)
+      .use(initReactI18next)
+      .init({
+        resources: { en: { translation: en }, id: { translation: id } },
+        fallbackLng: 'en',
+        supportedLngs: ['en', 'id'],
+        saveMissing: false,
+        interpolation: { escapeValue: false },
+        detection: { order: ['localStorage', 'navigator'], lookupLocalStorage: 'provoke_v1_lang' },
+      });
     export default i18n;
     ```
+
   - Create `public/locales/en/translation.json` and `public/locales/id/translation.json` with keys:
     - `app.title`, `app.tagline`
     - `home.level.label`, `home.level.easy/medium/hard/all`
@@ -781,6 +831,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: EN/ID translation files have key parity
     Tool: Bash (vitest)
@@ -804,7 +855,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 7. **localStorage key manifest + Zod-guarded persist helpers**
+- [x] 7. **localStorage key manifest + Zod-guarded persist helpers**
 
   **What to do**:
   - Install: `zod`.
@@ -812,9 +863,9 @@ Max Concurrent: 7 (Wave 1)
     ```ts
     export const STORAGE_KEYS = {
       settings: 'provoke_v1_settings',
-      seen:     'provoke_v1_seen',
-      session:  'provoke_v1_session',
-      lang:     'provoke_v1_lang',
+      seen: 'provoke_v1_seen',
+      session: 'provoke_v1_session',
+      lang: 'provoke_v1_lang',
     } as const;
     export const SCHEMA_VERSION = 'v1' as const;
     ```
@@ -862,6 +913,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: Corrupt localStorage falls back to defaults
     Tool: Bash (vitest)
@@ -886,7 +938,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 8. **CSV schema + seed file (5–10 questions per cat × level)**
+- [x] 8. **CSV schema + seed file (5–10 questions per cat × level)**
 
   **What to do**:
   - Create `src/data/questions.csv` with header row: `qid,category_id,level,q_en,hint_en,persp_en,q_id,hint_id,persp_id`.
@@ -937,6 +989,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] Validation script `node scripts/validate-csv.mjs` exits 0 (this script lives in Task 9 but the CSV must satisfy its constraints).
 
   **QA Scenarios**:
+
   ```
   Scenario: CSV row count + uniqueness
     Tool: Bash
@@ -962,7 +1015,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 9. **CSV → generated TS pipeline (prebuild hook, Zod, qid uniqueness)**
+- [x] 9. **CSV → generated TS pipeline (prebuild hook, Zod, qid uniqueness)**
 
   **What to do**:
   - Create `scripts/parse-csv.ts`:
@@ -1021,6 +1074,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: prebuild regenerates and TS compiles
     Tool: Bash
@@ -1048,7 +1102,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 10. **21 CategoryTheme objects (colors, particle configs, mood)**
+- [x] 10. **21 CategoryTheme objects (colors, particle configs, mood)**
 
   **What to do**:
   - Create `src/data/themes.ts`:
@@ -1126,6 +1180,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: All 21 categories have themes
     Tool: Bash (vitest)
@@ -1151,7 +1206,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 11. **Theme context provider + useTheme() hook**
+- [x] 11. **Theme context provider + useTheme() hook**
 
   **What to do**:
   - Create `src/three/ThemeProvider.tsx`:
@@ -1194,6 +1249,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: useTheme returns correct theme for category
     Tool: Bash (vitest)
@@ -1217,7 +1273,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 12. **useQualityTier() hook (DPR, hardwareConcurrency, reduced-motion)**
+- [x] 12. **useQualityTier() hook (DPR, hardwareConcurrency, reduced-motion)**
 
   **What to do**:
   - Create `src/three/useQualityTier.ts`:
@@ -1267,6 +1323,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: prefers-reduced-motion forces 'none' tier
     Tool: Bash (vitest)
@@ -1291,7 +1348,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 13. **R3F Canvas wrapper (Scene.tsx) — aria-hidden, dpr=[1,1], context-loss handler**
+- [x] 13. **R3F Canvas wrapper (Scene.tsx) — aria-hidden, dpr=[1,1], context-loss handler**
 
   **What to do**:
   - Install: `three`, `@types/three`, `@react-three/fiber`, `@react-three/drei`, `@react-three/postprocessing`, `@react-three/test-renderer` (dev), `vitest-canvas-mock` (dev).
@@ -1357,6 +1414,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `vitest run src/three/__tests__/Scene.test.tsx` passes ≥2 tests.
 
   **QA Scenarios**:
+
   ```
   Scenario: DPR is hardcoded to [1,1]
     Tool: Bash
@@ -1381,7 +1439,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 14. **Game store / FSM reducer (discriminated union transitions)**
+- [x] 14. **Game store / FSM reducer (discriminated union transitions)**
 
   **What to do**:
   - Choose between Zustand or React `useReducer` — executor may choose; both acceptable. **Recommended: Zustand** for cleaner cross-component access without prop drilling. If choosing Zustand, install it (`bun add zustand`).
@@ -1431,6 +1489,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: start transitions home -> playing with shuffled deck
     Tool: Bash (vitest)
@@ -1457,7 +1516,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 15. **Particles component (constellation/dust, uniform swap on theme)**
+- [x] 15. **Particles component (constellation/dust, uniform swap on theme)**
 
   **What to do**:
   - Create `src/three/Particles.tsx` rendering a `<points>` mesh + `<bufferGeometry>` + `<pointsMaterial>` (or custom shader material if needed for the connecting-line effect).
@@ -1510,6 +1569,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] No `DepthOfField` import (Bloom only — that's Task 16).
 
   **QA Scenarios**:
+
   ```
   Scenario: Particle count matches tier
     Tool: Bash (vitest with R3F test-renderer)
@@ -1535,7 +1595,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 16. **Postprocessing (Bloom only, quality-gated)**
+- [x] 16. **Postprocessing (Bloom only, quality-gated)**
 
   **What to do**:
   - Create `src/three/postprocessing.ts` exporting `<PostFX />` component.
@@ -1579,6 +1639,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: Only Bloom imported from postprocessing
     Tool: Bash
@@ -1603,7 +1664,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 17. **Card component (glass, backdrop-blur, Y-axis flip, reduced-motion fallback)**
+- [x] 17. **Card component (glass, backdrop-blur, Y-axis flip, reduced-motion fallback)**
 
   **What to do**:
   - Create `src/components/Card.tsx`:
@@ -1655,6 +1716,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: Phase=revealed shows perspective text
     Tool: Bash (vitest + RTL)
@@ -1690,7 +1752,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 18. **CategoryGrid component (21 chips, multi-select, themed)**
+- [x] 18. **CategoryGrid component (21 chips, multi-select, themed)**
 
   **What to do**:
   - Create `src/components/CategoryGrid.tsx`:
@@ -1737,6 +1799,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: 21 chips rendered with correct labels
     Tool: Bash (vitest + RTL)
@@ -1762,7 +1825,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 19. **Timer component (color-graded urgency, tabular nums)**
+- [x] 19. **Timer component (color-graded urgency, tabular nums)**
 
   **What to do**:
   - Create `src/components/Timer.tsx`:
@@ -1803,6 +1866,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `vitest run src/components/__tests__/Timer.test.tsx` passes ≥4 tests.
 
   **QA Scenarios**:
+
   ```
   Scenario: Format 90 -> 1:30, 5 -> 0:05
     Tool: Bash (vitest)
@@ -1826,7 +1890,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 20. **LanguageToggle + Brand wordmark + small UI primitives**
+- [x] 20. **LanguageToggle + Brand wordmark + small UI primitives**
 
   **What to do**:
   - Create `src/components/LanguageToggle.tsx`:
@@ -1869,6 +1933,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `vitest run src/components/__tests__/LanguageToggle.test.tsx` passes ≥3 tests.
 
   **QA Scenarios**:
+
   ```
   Scenario: Toggle changes i18n language and persists
     Tool: Bash (vitest)
@@ -1894,7 +1959,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 21. **i18n category labels + description injection**
+- [x] 21. **i18n category labels + description injection**
 
   **What to do**:
   - For each of 21 categories, add to BOTH `public/locales/en/translation.json` and `public/locales/id/translation.json`:
@@ -1933,6 +1998,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] No component file contains literal Indonesian or English category names.
 
   **QA Scenarios**:
+
   ```
   Scenario: All 21 categories have i18n keys in both locales
     Tool: Bash
@@ -1956,7 +2022,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 22. **HomeScreen (category grid + level + timer pickers + Start)**
+- [x] 22. **HomeScreen (category grid + level + timer pickers + Start)**
 
   **What to do**:
   - Create `src/screens/HomeScreen.tsx`:
@@ -2002,6 +2068,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `vitest run src/screens/__tests__/HomeScreen.test.tsx` passes ≥4 tests.
 
   **QA Scenarios**:
+
   ```
   Scenario: Start disabled until category selected
     Tool: Bash (vitest + RTL)
@@ -2026,7 +2093,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 23. **PlayingScreen (card stack + actions + perspective reveal + timer)**
+- [x] 23. **PlayingScreen (card stack + actions + perspective reveal + timer)**
 
   **What to do**:
   - Create `src/screens/PlayingScreen.tsx`:
@@ -2074,6 +2141,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `vitest run src/screens/__tests__/PlayingScreen.test.tsx` passes ≥5 tests.
 
   **QA Scenarios**:
+
   ```
   Scenario: Action buttons gated by phase
     Tool: Bash (vitest + RTL)
@@ -2099,7 +2167,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 24. **FinishedScreen (stats + replay)**
+- [x] 24. **FinishedScreen (stats + replay)**
 
   **What to do**:
   - Create `src/screens/FinishedScreen.tsx`:
@@ -2134,6 +2202,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `vitest run src/screens/__tests__/FinishedScreen.test.tsx` passes.
 
   **QA Scenarios**:
+
   ```
   Scenario: Renders count and replay action
     Tool: Bash (vitest + RTL)
@@ -2148,7 +2217,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 25. **App.tsx FSM root + screen switcher + scene mount**
+- [x] 25. **App.tsx FSM root + screen switcher + scene mount**
 
   **What to do**:
   - Create `src/App.tsx`:
@@ -2198,6 +2267,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `bun run build` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: Build produces working SPA
     Tool: Bash
@@ -2222,7 +2292,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 26. **localStorage wiring (settings, seen, session restore)**
+- [x] 26. **localStorage wiring (settings, seen, session restore)**
 
   **What to do**:
   - In `src/App.tsx` (or a small `src/store/sync.ts` hook), wire localStorage to the game store:
@@ -2268,6 +2338,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `vitest run src/store/__tests__/sync.test.ts` passes ≥4 tests.
 
   **QA Scenarios**:
+
   ```
   Scenario: Seen list grows on perspective reveal
     Tool: Bash (vitest)
@@ -2293,7 +2364,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 27. **Vitest unit tests (FSM, CSV, i18n, persist, themes, quality)**
+- [x] 27. **Vitest unit tests (FSM, CSV, i18n, persist, themes, quality)**
 
   **What to do**:
   - Create `vitest.config.ts` with:
@@ -2304,7 +2375,9 @@ Max Concurrent: 7 (Wave 1)
     ```ts
     import '@testing-library/jest-dom/vitest';
     import 'vitest-canvas-mock';
-    afterEach(() => { localStorage.clear(); });
+    afterEach(() => {
+      localStorage.clear();
+    });
     ```
   - Ensure each task that referenced a `__tests__` file actually shipped that test file. Cross-check the list:
     - `src/types/__tests__/category.test.ts` (T2)
@@ -2361,6 +2434,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] Coverage report shows non-zero coverage for state, persist, i18n, themes (informational, not gated).
 
   **QA Scenarios**:
+
   ```
   Scenario: Full test suite passes
     Tool: Bash
@@ -2384,7 +2458,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 28. **README + content-editing guide + deployment docs**
+- [x] 28. **README + content-editing guide + deployment docs**
 
   **What to do**:
   - Create `README.md` at repo root with sections:
@@ -2431,6 +2505,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] No broken links in markdown (basic check: no `[text](TODO)` placeholders).
 
   **QA Scenarios**:
+
   ```
   Scenario: All docs present
     Tool: Bash
@@ -2453,17 +2528,19 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 29. **Static-host build config + .env example**
+- [x] 29. **Static-host build config + .env example**
 
   **What to do**:
   - Create `vercel.json`:
     ```json
     {
       "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-      "headers": [{
-        "source": "/assets/(.*)",
-        "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-      }]
+      "headers": [
+        {
+          "source": "/assets/(.*)",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        }
+      ]
     }
     ```
   - Create `netlify.toml`:
@@ -2506,6 +2583,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `.env.example` exists (even if empty with comment).
 
   **QA Scenarios**:
+
   ```
   Scenario: Deploy configs present
     Tool: Bash
@@ -2521,7 +2599,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 30. **Lint + format pass + AI-slop sweep**
+- [x] 30. **Lint + format pass + AI-slop sweep**
 
   **What to do**:
   - Run `bun run lint` — fix all errors and warnings.
@@ -2571,6 +2649,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] `npx tsc --noEmit` exits 0.
 
   **QA Scenarios**:
+
   ```
   Scenario: No 'as any' anywhere
     Tool: Bash
@@ -2593,7 +2672,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Commit**: NO
 
-- [ ] 31. **Final integration smoke (agent dev-server walkthrough — static analysis only)**
+- [x] 31. **Final integration smoke (agent dev-server walkthrough — static analysis only)**
 
   **What to do**:
   - **Per AGENTS.md: Playwright is OFF. F3 reviewer wave uses static analysis.** This task is a code-trace smoke check.
@@ -2641,6 +2720,7 @@ Max Concurrent: 7 (Wave 1)
   - [ ] No "TODO: wire this" comments remain in screens.
 
   **QA Scenarios**:
+
   ```
   Scenario: Dev server serves HTML
     Tool: Bash
@@ -2677,7 +2757,7 @@ Max Concurrent: 7 (Wave 1)
 > **Do NOT auto-proceed after verification. Wait for user's explicit approval before marking work complete.**
 > **Never mark F1–F4 as checked before getting user's okay.** Rejection or user feedback → fix → re-run → present again → wait for okay.
 
-- [ ] F1. **Plan Compliance Audit** — `oracle`
+- [x] F1. **Plan Compliance Audit** — `oracle`
 
   **What to do**: Read this plan end-to-end. For each "Must Have": verify implementation exists (read file, run command). For each "Must NOT Have": grep codebase for forbidden patterns — reject with `file:line` on hit. Check evidence files exist in `.sisyphus/evidence/`. Compare deliverables list against actual file tree.
 
@@ -2694,13 +2774,13 @@ Max Concurrent: 7 (Wave 1)
 
   **Output**: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | Greps [9/9 clean] | VERDICT: APPROVE/REJECT`
 
-- [ ] F2. **Code Quality Review** — `unspecified-high`
+- [x] F2. **Code Quality Review** — `unspecified-high`
 
   **What to do**: Run `npx tsc --noEmit` + `bun run lint` + `vitest run`. Review all changed files for: `as any` / `@ts-ignore`, empty `catch {}`, `console.log` in production code paths, commented-out code blocks, unused imports/exports, generic names (`data`, `result`, `item`, `temp`, `Helper`, `Manager`). Check AI slop: excessive JSDoc, over-abstraction (single-use abstract classes / generic factories), comments restating obvious code.
 
   **Output**: `Build [PASS/FAIL] | Lint [PASS/FAIL] | Tests [N pass / N fail] | Files [N clean / N issues] | AI-slop hotspots [N] | VERDICT: APPROVE/REJECT`
 
-- [ ] F3. **Static-Analysis QA** — `unspecified-high` (NO Playwright per AGENTS.md)
+- [x] F3. **Static-Analysis QA** — `unspecified-high` (NO Playwright per AGENTS.md)
 
   **What to do**: Per AGENTS.md, F3 replaces Playwright with static analysis. Execute:
   - Read `src/screens/PlayingScreen.tsx` end-to-end; trace data flow: deck shuffle → card display → hint → reveal → next → finished.
@@ -2715,7 +2795,7 @@ Max Concurrent: 7 (Wave 1)
 
   **Output**: `Read-throughs [9/9] | Issues found [N] | Critical [N] | VERDICT: APPROVE/REJECT`
 
-- [ ] F4. **Scope Fidelity Check** — `deep`
+- [x] F4. **Scope Fidelity Check** — `deep`
 
   **What to do**: For each task in this plan, read its "What to do" section + acceptance criteria, then read the actual git diff for files it owns. Verify 1:1 — everything specified was built (no missing), nothing beyond was built (no creep). Check "Must NOT do" compliance per task. Detect cross-task contamination (Task N modifying Task M's files). Flag any file in the repo not accounted for by any task.
 
@@ -2727,44 +2807,45 @@ Max Concurrent: 7 (Wave 1)
 
 > Per AGENTS.md: **no auto-commits**. Commits happen ONLY when user explicitly says "commit". Tasks track suggested commits below, but executor MUST NOT run `rtk git commit` without user instruction.
 
-| Task | Suggested commit msg | Files |
-|---|---|---|
-| 1 | `chore: scaffold vite react ts` | `package.json`, `vite.config.ts`, `tsconfig.json`, `.eslintrc`, `.prettierrc` |
-| 2 | `feat(types): core type contracts` | `src/types/*.ts` |
-| 3 | `feat(data): locked 21 categories` | `src/data/categories.ts` |
-| 4 | `chore: tailwind v4 + shadcn init` | `tailwind.config.ts`, `components.json`, `src/index.css`, `src/components/ui/*` |
-| 5 | `chore: self-hosted fonts` | `package.json`, `src/main.tsx` |
-| 6 | `feat(i18n): en/id skeleton` | `src/i18n/*`, `public/locales/**` |
-| 7 | `feat(store): persist helpers` | `src/store/keys.ts`, `src/store/persist.ts` |
-| 8 | `feat(content): seed questions csv` | `src/data/questions.csv` |
-| 9 | `feat(build): csv to typed data pipeline` | `scripts/parse-csv.ts`, `src/data/questions.generated.ts`, `package.json` |
-| 10 | `feat(themes): 21 category themes` | `src/data/themes.ts` |
-| 11 | `feat(themes): provider + hook` | `src/three/ThemeProvider.tsx`, `src/three/useTheme.ts` |
-| 12 | `feat(three): quality tier hook` | `src/three/useQualityTier.ts` |
-| 13 | `feat(three): canvas scene shell` | `src/three/Scene.tsx` |
-| 14 | `feat(store): game fsm reducer` | `src/store/game.store.ts` |
-| 15 | `feat(three): constellation particles` | `src/three/Particles.tsx` |
-| 16 | `feat(three): bloom postprocessing` | `src/three/postprocessing.ts` |
-| 17 | `feat(ui): glass card y-axis flip` | `src/components/Card.tsx` |
-| 18 | `feat(ui): category grid` | `src/components/CategoryGrid.tsx` |
-| 19 | `feat(ui): timer` | `src/components/Timer.tsx` |
-| 20 | `feat(ui): language toggle + brand` | `src/components/LanguageToggle.tsx`, `src/components/Brand.tsx` |
-| 21 | `feat(i18n): category labels injection` | `public/locales/**` |
-| 22 | `feat(screens): home` | `src/screens/HomeScreen.tsx` |
-| 23 | `feat(screens): playing` | `src/screens/PlayingScreen.tsx` |
-| 24 | `feat(screens): finished` | `src/screens/FinishedScreen.tsx` |
-| 25 | `feat: app root + scene mount` | `src/App.tsx`, `src/main.tsx`, `index.html` |
-| 26 | `feat(store): localstorage wiring` | `src/App.tsx`, `src/store/*` |
-| 27 | `test: vitest unit suite` | `src/**/__tests__/*.test.ts(x)`, `vitest.config.ts` |
-| 28 | `docs: readme + guides` | `README.md`, `docs/*.md` |
-| 29 | `chore: deploy config` | `vercel.json` or `netlify.toml`, `.env.example` |
-| 30 | `refactor: lint + ai-slop sweep` | various |
+| Task | Suggested commit msg                      | Files                                                                           |
+| ---- | ----------------------------------------- | ------------------------------------------------------------------------------- |
+| 1    | `chore: scaffold vite react ts`           | `package.json`, `vite.config.ts`, `tsconfig.json`, `.eslintrc`, `.prettierrc`   |
+| 2    | `feat(types): core type contracts`        | `src/types/*.ts`                                                                |
+| 3    | `feat(data): locked 21 categories`        | `src/data/categories.ts`                                                        |
+| 4    | `chore: tailwind v4 + shadcn init`        | `tailwind.config.ts`, `components.json`, `src/index.css`, `src/components/ui/*` |
+| 5    | `chore: self-hosted fonts`                | `package.json`, `src/main.tsx`                                                  |
+| 6    | `feat(i18n): en/id skeleton`              | `src/i18n/*`, `public/locales/**`                                               |
+| 7    | `feat(store): persist helpers`            | `src/store/keys.ts`, `src/store/persist.ts`                                     |
+| 8    | `feat(content): seed questions csv`       | `src/data/questions.csv`                                                        |
+| 9    | `feat(build): csv to typed data pipeline` | `scripts/parse-csv.ts`, `src/data/questions.generated.ts`, `package.json`       |
+| 10   | `feat(themes): 21 category themes`        | `src/data/themes.ts`                                                            |
+| 11   | `feat(themes): provider + hook`           | `src/three/ThemeProvider.tsx`, `src/three/useTheme.ts`                          |
+| 12   | `feat(three): quality tier hook`          | `src/three/useQualityTier.ts`                                                   |
+| 13   | `feat(three): canvas scene shell`         | `src/three/Scene.tsx`                                                           |
+| 14   | `feat(store): game fsm reducer`           | `src/store/game.store.ts`                                                       |
+| 15   | `feat(three): constellation particles`    | `src/three/Particles.tsx`                                                       |
+| 16   | `feat(three): bloom postprocessing`       | `src/three/postprocessing.ts`                                                   |
+| 17   | `feat(ui): glass card y-axis flip`        | `src/components/Card.tsx`                                                       |
+| 18   | `feat(ui): category grid`                 | `src/components/CategoryGrid.tsx`                                               |
+| 19   | `feat(ui): timer`                         | `src/components/Timer.tsx`                                                      |
+| 20   | `feat(ui): language toggle + brand`       | `src/components/LanguageToggle.tsx`, `src/components/Brand.tsx`                 |
+| 21   | `feat(i18n): category labels injection`   | `public/locales/**`                                                             |
+| 22   | `feat(screens): home`                     | `src/screens/HomeScreen.tsx`                                                    |
+| 23   | `feat(screens): playing`                  | `src/screens/PlayingScreen.tsx`                                                 |
+| 24   | `feat(screens): finished`                 | `src/screens/FinishedScreen.tsx`                                                |
+| 25   | `feat: app root + scene mount`            | `src/App.tsx`, `src/main.tsx`, `index.html`                                     |
+| 26   | `feat(store): localstorage wiring`        | `src/App.tsx`, `src/store/*`                                                    |
+| 27   | `test: vitest unit suite`                 | `src/**/__tests__/*.test.ts(x)`, `vitest.config.ts`                             |
+| 28   | `docs: readme + guides`                   | `README.md`, `docs/*.md`                                                        |
+| 29   | `chore: deploy config`                    | `vercel.json` or `netlify.toml`, `.env.example`                                 |
+| 30   | `refactor: lint + ai-slop sweep`          | various                                                                         |
 
 ---
 
 ## Success Criteria
 
 ### Verification Commands
+
 ```bash
 # Install
 bun install        # exits 0 (no peer-dep errors)
@@ -2798,6 +2879,7 @@ node -e "const c=require('./src/data/categories').CATEGORIES;console.assert(c.le
 ```
 
 ### Final Checklist
+
 - [ ] All "Must Have" items present (verified by F1 oracle audit)
 - [ ] All "Must NOT Have" items absent (verified by F1 greps returning zero)
 - [ ] All Vitest unit tests pass

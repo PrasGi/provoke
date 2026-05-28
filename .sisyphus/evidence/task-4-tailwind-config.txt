@@ -1,0 +1,9 @@
+Tailwind v4 + shadcn/ui evidence
+
+- package.json includes tailwindcss@^4, @tailwindcss/vite, and tw-animate-css
+- package.json does not include tailwindcss-animate
+- vite.config.ts uses @tailwindcss/vite
+- src/index.css uses @import "tailwindcss" and @import "tw-animate-css" with dark cinematic tokens
+- components.json exists at repo root
+- src/components/ui/button.tsx exists
+- repo-wide search for "tailwindcss-animate" returned no matches

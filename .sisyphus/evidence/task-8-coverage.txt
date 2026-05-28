@@ -1,0 +1,2 @@
+awk -F, 'NR>1{print $1}' src/data/questions.csv | sort | uniq -d | wc -l
+0

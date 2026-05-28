@@ -1,0 +1,126 @@
+{
+  "app": {
+    "title": "Provoke",
+    "tagline": "Think deeper. Talk bolder."
+  },
+  "home": {
+    "level": {
+      "label": "Level",
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "all": "All Levels"
+    },
+    "timer": {
+      "label": "Timer",
+      "1min": "1 min",
+      "2min": "2 min",
+      "3min": "3 min",
+      "free": "Free"
+    },
+    "start": "Start",
+    "cards_available": "{{count}} questions available",
+    "categories": {
+      "label": "Categories",
+      "select_all": "Select All",
+      "clear": "Clear"
+    }
+  },
+  "category": {
+    "ethics": {
+      "label": "Ethics",
+      "description": "Right vs wrong, intent vs impact, moral dilemmas"
+    },
+    "philosophy": {
+      "label": "Philosophy",
+      "description": "Fundamental questions about existence, knowledge, and reality"
+    },
+    "politics": { "label": "Politics", "description": "Power, governance, policy, and democracy" },
+    "technology": {
+      "label": "Technology",
+      "description": "Innovation, digital impact, AI, and the human future"
+    },
+    "law": { "label": "Law", "description": "Justice, legal systems, rights, and obligations" },
+    "social": {
+      "label": "Social",
+      "description": "Norms, community, interaction, and social change"
+    },
+    "economy": {
+      "label": "Economy",
+      "description": "Money, markets, inequality, and economic systems"
+    },
+    "life": { "label": "Life", "description": "Meaning of life, choices, happiness, and purpose" },
+    "identity": { "label": "Identity", "description": "Who we are, culture, gender, and selfhood" },
+    "relationship": {
+      "label": "Relationship",
+      "description": "Love, friendship, family, and human connection"
+    },
+    "education": {
+      "label": "Education",
+      "description": "Learning, educational systems, and self-development"
+    },
+    "career": {
+      "label": "Career",
+      "description": "Work, ambition, work-life balance, and success"
+    },
+    "environment": {
+      "label": "Environment",
+      "description": "Nature, climate change, sustainability, and responsibility"
+    },
+    "religion": {
+      "label": "Religion",
+      "description": "Belief, spirituality, and the role of religion in society"
+    },
+    "psychology": {
+      "label": "Psychology",
+      "description": "Mind, behavior, trauma, and mental health"
+    },
+    "science": {
+      "label": "Science",
+      "description": "Scientific method, discovery, and the limits of knowledge"
+    },
+    "power": {
+      "label": "Power",
+      "description": "Authority, control, influence, and abuse of power"
+    },
+    "future": {
+      "label": "Future",
+      "description": "Predictions, hopes, fears, and future scenarios"
+    },
+    "paradox": {
+      "label": "Paradox",
+      "description": "Contradictions, unsolvable dilemmas, and life's ironies"
+    },
+    "local": {
+      "label": "Local",
+      "description": "Indonesian issues, local culture, and archipelago context"
+    },
+    "popculture": {
+      "label": "Pop Culture",
+      "description": "Media, entertainment, trends, and popular culture influence"
+    }
+  },
+  "play": {
+    "hint": "Hint",
+    "reveal": "Reveal Perspective",
+    "next": "Next Card",
+    "finish": "Finish",
+    "perspective_title": "Perspective",
+    "stop": "Stop",
+    "stop_title": "End this session?",
+    "stop_desc": "Your progress will be lost.",
+    "stop_cancel": "Keep Playing",
+    "stop_confirm": "End Session"
+  },
+  "finished": {
+    "title": "Session Complete",
+    "cards_played": "You explored {{count}} questions",
+    "play_again": "Play Again"
+  },
+  "lang": {
+    "toggle": {
+      "en": "EN",
+      "id": "ID"
+    }
+  }
+}

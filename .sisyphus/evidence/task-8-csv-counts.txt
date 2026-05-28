@@ -1,0 +1,2 @@
+wc -l src/data/questions.csv
+316 src/data/questions.csv

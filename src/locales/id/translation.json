@@ -1,0 +1,132 @@
+{
+  "app": {
+    "title": "Provoke",
+    "tagline": "Berpikir lebih dalam. Bicara lebih berani."
+  },
+  "home": {
+    "level": {
+      "label": "Level",
+      "easy": "Mudah",
+      "medium": "Sedang",
+      "hard": "Sulit",
+      "all": "Semua Level"
+    },
+    "timer": {
+      "label": "Timer",
+      "1min": "1 menit",
+      "2min": "2 menit",
+      "3min": "3 menit",
+      "free": "Bebas"
+    },
+    "start": "Mulai",
+    "cards_available": "{{count}} pertanyaan tersedia",
+    "categories": {
+      "label": "Kategori",
+      "select_all": "Pilih Semua",
+      "clear": "Hapus"
+    }
+  },
+  "category": {
+    "ethics": { "label": "Etika", "description": "Benar vs salah, niat vs dampak, dilema moral" },
+    "philosophy": {
+      "label": "Filsafat",
+      "description": "Pertanyaan mendasar tentang eksistensi, pengetahuan, dan realitas"
+    },
+    "politics": {
+      "label": "Politik",
+      "description": "Kekuasaan, pemerintahan, kebijakan, dan demokrasi"
+    },
+    "technology": {
+      "label": "Teknologi",
+      "description": "Inovasi, dampak digital, AI, dan masa depan manusia"
+    },
+    "law": { "label": "Hukum", "description": "Keadilan, sistem hukum, hak, dan kewajiban" },
+    "social": {
+      "label": "Sosial",
+      "description": "Norma, komunitas, interaksi, dan perubahan sosial"
+    },
+    "economy": {
+      "label": "Ekonomi",
+      "description": "Uang, pasar, ketimpangan, dan sistem ekonomi"
+    },
+    "life": {
+      "label": "Kehidupan",
+      "description": "Makna hidup, pilihan, kebahagiaan, dan tujuan"
+    },
+    "identity": {
+      "label": "Identitas",
+      "description": "Siapa kita, budaya, gender, dan jati diri"
+    },
+    "relationship": {
+      "label": "Hubungan",
+      "description": "Cinta, persahabatan, keluarga, dan koneksi manusia"
+    },
+    "education": {
+      "label": "Pendidikan",
+      "description": "Belajar, sistem pendidikan, dan pengembangan diri"
+    },
+    "career": {
+      "label": "Karier",
+      "description": "Pekerjaan, ambisi, keseimbangan hidup, dan kesuksesan"
+    },
+    "environment": {
+      "label": "Lingkungan",
+      "description": "Alam, perubahan iklim, keberlanjutan, dan tanggung jawab"
+    },
+    "religion": {
+      "label": "Agama",
+      "description": "Kepercayaan, spiritualitas, dan peran agama dalam masyarakat"
+    },
+    "psychology": {
+      "label": "Psikologi",
+      "description": "Pikiran, perilaku, trauma, dan kesehatan mental"
+    },
+    "science": {
+      "label": "Sains",
+      "description": "Metode ilmiah, penemuan, dan batas pengetahuan"
+    },
+    "power": {
+      "label": "Kekuasaan",
+      "description": "Otoritas, kontrol, pengaruh, dan penyalahgunaan kekuasaan"
+    },
+    "future": {
+      "label": "Masa Depan",
+      "description": "Prediksi, harapan, ketakutan, dan skenario masa depan"
+    },
+    "paradox": {
+      "label": "Paradoks",
+      "description": "Kontradiksi, dilema tak terpecahkan, dan ironi kehidupan"
+    },
+    "local": {
+      "label": "Lokal",
+      "description": "Isu Indonesia, budaya lokal, dan konteks nusantara"
+    },
+    "popculture": {
+      "label": "Budaya Pop",
+      "description": "Media, hiburan, tren, dan pengaruh budaya populer"
+    }
+  },
+  "play": {
+    "hint": "Petunjuk",
+    "reveal": "Buka Perspektif",
+    "next": "Kartu Berikutnya",
+    "finish": "Selesai",
+    "perspective_title": "Perspektif",
+    "stop": "Berhenti",
+    "stop_title": "Akhiri sesi ini?",
+    "stop_desc": "Progres kamu akan hilang.",
+    "stop_cancel": "Lanjutkan",
+    "stop_confirm": "Akhiri Sesi"
+  },
+  "finished": {
+    "title": "Sesi Selesai",
+    "cards_played": "Kamu menjelajahi {{count}} pertanyaan",
+    "play_again": "Main Lagi"
+  },
+  "lang": {
+    "toggle": {
+      "en": "EN",
+      "id": "ID"
+    }
+  }
+}

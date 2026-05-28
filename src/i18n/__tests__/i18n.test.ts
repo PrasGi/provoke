@@ -23,6 +23,8 @@ describe('i18n', () => {
     i18n.addResource('en', 'translation', 'fallback_probe', 'Fallback Works');
     await i18n.changeLanguage('id');
     expect(i18n.t('fallback_probe')).toBe('Fallback Works');
+    const enBundle = i18n.getResourceBundle('en', 'translation') as Record<string, unknown>;
+    delete enBundle.fallback_probe;
   });
 
   it('saveMissing is false', () => {

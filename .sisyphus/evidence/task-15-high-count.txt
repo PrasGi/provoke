@@ -1,0 +1,13 @@
+=== npx tsc --noEmit ===
+(exit 0 - no output)
+
+=== bunx vitest run src/three/__tests__/Particles.test.tsx ===
+
+ RUN  v4.1.7 /Users/macbook/workspace/personal/provoke-web
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  00:47:46
+   Duration  687ms (transform 34ms, setup 49ms, import 82ms, tests 69ms, environment 404ms)
+

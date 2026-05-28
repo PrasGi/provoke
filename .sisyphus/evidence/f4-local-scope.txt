@@ -1,0 +1,123 @@
+## F4 local scope fidelity final rerun
+
+### Git status summary
+ M .eslintrc.cjs
+ M .gitignore
+ M .sisyphus/boulder.json
+ M .sisyphus/notepads/provoke-web/learnings.md
+ M .sisyphus/plans/provoke-web.md
+ M .sisyphus/run-continuation/ses_19ba556d5ffe0OhLzV0PAvj14G.json
+ M bun.lock
+ M index.html
+ M package.json
+ M public/locales/en/translation.json
+ M public/locales/id/translation.json
+ M src/App.tsx
+ M src/components/ui/button.tsx
+ M src/data/__tests__/categories.test.ts
+ M src/data/categories.ts
+ M src/i18n/__tests__/i18n.test.ts
+ M src/index.css
+ M src/lib/utils.ts
+ M src/main.tsx
+ M src/types/__tests__/category.test.ts
+ M src/types/category.ts
+ M src/types/game.ts
+ M vite.config.ts
+?? .env.example
+?? .sisyphus/evidence/f1-local-deliverables.txt
+?? .sisyphus/evidence/f1-local-greps.txt
+?? .sisyphus/evidence/f2-local-hygiene.txt
+?? .sisyphus/evidence/f2-local-quality.txt
+?? .sisyphus/evidence/f4-local-scope.txt
+?? .sisyphus/evidence/task-10-themes-test.txt
+?? .sisyphus/evidence/task-11-useTheme.txt
+?? .sisyphus/evidence/task-12-high-tier.txt
+?? .sisyphus/evidence/task-12-reduced-motion.txt
+?? .sisyphus/evidence/task-13-dpr.txt
+?? .sisyphus/evidence/task-13-fallback.txt
+?? .sisyphus/evidence/task-14-finished.txt
+?? .sisyphus/evidence/task-14-start.txt
+?? .sisyphus/evidence/task-15-high-count.txt
+?? .sisyphus/evidence/task-16-bloom-only.txt
+?? .sisyphus/evidence/task-17-revealed.txt
+?? .sisyphus/evidence/task-18-render.txt
+?? .sisyphus/evidence/task-19-color.txt
+?? .sisyphus/evidence/task-19-format.txt
+?? .sisyphus/evidence/task-20-brand.txt
+?? .sisyphus/evidence/task-20-toggle.txt
+?? .sisyphus/evidence/task-21-i18n-keys.txt
+?? .sisyphus/evidence/task-22-start-gate.txt
+?? .sisyphus/evidence/task-23-actions.txt
+?? .sisyphus/evidence/task-24-finished.txt
+?? .sisyphus/evidence/task-25-build.txt
+?? .sisyphus/evidence/task-26-seen.txt
+?? .sisyphus/evidence/task-27-test-suite.txt
+?? .sisyphus/evidence/task-28-docs.txt
+?? .sisyphus/evidence/task-28-readme.txt
+?? .sisyphus/evidence/task-29-deploy.txt
+?? .sisyphus/evidence/task-3-categories-test.txt
+?? .sisyphus/evidence/task-30-green.txt
+?? .sisyphus/evidence/task-30-no-any.txt
+?? .sisyphus/evidence/task-30-no-console-log.txt
+?? .sisyphus/evidence/task-31-curl-title.txt
+?? .sisyphus/evidence/task-31-validation.txt
+?? .sisyphus/evidence/task-31-walkthrough.md
+?? .sisyphus/evidence/task-4-build-output.txt
+?? .sisyphus/evidence/task-4-tailwind-config.txt
+?? .sisyphus/evidence/task-5-dist-fonts.txt
+?? .sisyphus/evidence/task-5-fonts.txt
+?? .sisyphus/evidence/task-6-fallback.txt
+?? .sisyphus/evidence/task-6-key-parity.txt
+?? .sisyphus/evidence/task-7-corrupt-read.txt
+?? .sisyphus/evidence/task-7-roundtrip.txt
+?? .sisyphus/evidence/task-8-coverage.txt
+?? .sisyphus/evidence/task-8-csv-counts.txt
+?? .sisyphus/evidence/task-9-prebuild.txt
+?? .sisyphus/run-continuation/ses_1988022a4ffegaOYnUu4vTV9xc.json
+?? .sisyphus/run-continuation/ses_19bce8c92ffexD7qawcohpofn2.json
+?? README.md
+?? docs/
+?? netlify.toml
+?? scripts/
+?? src/components/Brand.tsx
+?? src/components/Card.tsx
+?? src/components/CategoryGrid.tsx
+?? src/components/LanguageToggle.tsx
+?? src/components/Timer.tsx
+?? src/components/__tests__/
+?? src/components/ui/button-variants.ts
+?? src/components/ui/dialog.tsx
+?? src/components/ui/toggle-group.tsx
+?? src/components/ui/toggle-variants.ts
+?? src/components/ui/toggle.tsx
+?? src/components/ui/tooltip.tsx
+?? src/data/__tests__/questions.test.ts
+?? src/data/__tests__/themes.test.ts
+?? src/data/questions.csv
+?? src/data/questions.generated.ts
+?? src/data/themes.ts
+?? src/screens/
+?? src/store/
+?? src/three/
+?? src/vitest.d.ts
+?? vercel.json
+?? vitest.config.ts
+?? vitest.setup.ts
+### Unaccounted suspicious files check
+PASS no suspicious out-of-scope files found
+
+### Core scope files
+PASS scope-owned files exist
+
+### Final plan checkboxes
+2295:- [x] 26. **localStorage wiring (settings, seen, session restore)**
+2367:- [x] 27. **Vitest unit tests (FSM, CSV, i18n, persist, themes, quality)**
+2461:- [x] 28. **README + content-editing guide + deployment docs**
+2531:- [x] 29. **Static-host build config + .env example**
+2602:- [x] 30. **Lint + format pass + AI-slop sweep**
+2675:- [x] 31. **Final integration smoke (agent dev-server walkthrough — static analysis only)**
+2760:- [ ] F1. **Plan Compliance Audit** — `oracle`
+2777:- [ ] F2. **Code Quality Review** — `unspecified-high`
+2783:- [ ] F3. **Static-Analysis QA** — `unspecified-high` (NO Playwright per AGENTS.md)
+2798:- [ ] F4. **Scope Fidelity Check** — `deep`

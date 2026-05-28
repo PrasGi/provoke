@@ -1,4 +1,7 @@
-node_modules
-dist
+dist/
+node_modules/
+.env
+*.log
+.vite/
+coverage/
 .DS_Store
-.vite

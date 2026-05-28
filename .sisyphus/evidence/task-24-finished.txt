@@ -1,0 +1,6 @@
+Verification:
+- npx tsc --noEmit → exit 0
+- bunx vitest run src/screens/__tests__/FinishedScreen.test.tsx → 1 file passed, 4 tests passed
+
+Notes:
+- lsp_diagnostics reported stale unused React import hints after the files were updated, but the actual file contents are clean and the test/typecheck both passed.

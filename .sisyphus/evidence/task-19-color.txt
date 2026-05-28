@@ -1,0 +1,9 @@
+
+ RUN  v4.1.7 /Users/macbook/workspace/personal/provoke-web
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  00:46:34
+   Duration  1.22s (transform 65ms, setup 122ms, import 136ms, tests 135ms, environment 669ms)
+

@@ -1,0 +1,22 @@
+## F2 local hygiene greps final rerun after F1 fixes
+
+### as any
+PASS no matches for as any
+
+### @ts-ignore
+PASS no matches for @ts-ignore
+
+### @ts-expect-error
+PASS no matches for @ts-expect-error
+
+### console\.log
+PASS no matches for console\.log
+
+### // TODO
+PASS no matches for // TODO
+
+### // eslint-disable
+PASS no matches for // eslint-disable
+
+### empty catch blocks
+PASS no empty catch blocks
