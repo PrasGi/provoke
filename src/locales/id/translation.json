@@ -121,7 +121,8 @@
   "finished": {
     "title": "Sesi Selesai",
     "cards_played": "Kamu menjelajahi {{count}} pertanyaan",
-    "play_again": "Main Lagi"
+    "play_again": "Main Lagi",
+    "home": "Ganti Kategori"
   },
   "lang": {
     "toggle": {

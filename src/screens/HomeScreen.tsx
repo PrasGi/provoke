@@ -20,7 +20,9 @@ function SectionLabel({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-center gap-2.5">
       <div className="w-1 h-4 rounded-full bg-gradient-to-b from-primary/80 to-primary/20" />
-      <p className="text-[11px] text-white/60 uppercase tracking-[0.2em] font-semibold">{children}</p>
+      <p className="text-[11px] text-white/60 uppercase tracking-[0.2em] font-semibold">
+        {children}
+      </p>
     </div>
   );
 }
@@ -81,7 +83,7 @@ export function HomeScreen() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col items-center justify-start px-4 pt-10 pb-20 gap-10 max-w-xl mx-auto">
+      <div className="min-h-screen flex flex-col items-center justify-start px-4 pt-6 pb-16 gap-6 max-w-xl mx-auto">
         <div className="w-full flex items-center justify-between">
           <Brand />
           <div className="flex items-center gap-2">
@@ -123,7 +125,7 @@ export function HomeScreen() {
                 className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium ${
                   level === key
                     ? 'bg-gradient-to-b from-white/15 to-white/8 text-white border border-white/20 shadow-[0_0_12px_oklch(0.72_0.13_70_/_0.15)]'
-                    : 'text-white/40 hover:text-white/65 hover:bg-white/6'
+                    : 'text-white/60 hover:text-white/85 hover:bg-white/6'
                 }`}
               >
                 {label}
@@ -143,7 +145,7 @@ export function HomeScreen() {
                 className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium ${
                   timerDur === value
                     ? 'bg-gradient-to-b from-white/15 to-white/8 text-white border border-white/20 shadow-[0_0_12px_oklch(0.72_0.13_70_/_0.15)]'
-                    : 'text-white/40 hover:text-white/65 hover:bg-white/6'
+                    : 'text-white/60 hover:text-white/85 hover:bg-white/6'
                 }`}
               >
                 {label}

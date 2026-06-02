@@ -63,7 +63,7 @@ export function PlayingScreen() {
     <>
       <div className="min-h-screen flex flex-col px-4 py-4 max-w-2xl mx-auto">
         <div className="flex items-center justify-between py-2">
-          <span className="text-sm text-white/55 tabular-nums">
+          <span className="text-sm text-white/65 tabular-nums">
             {idx + 1} / {deck.length}
           </span>
           {timerDur > 0 && <Timer secs={secs} total={timerDur} running={running} />}
@@ -72,13 +72,13 @@ export function PlayingScreen() {
             variant="ghost"
             size="sm"
             onClick={() => setStopOpen(true)}
-            className="text-white/50 hover:text-red-400 border border-white/8 hover:border-red-400/30"
+            className="text-red-400/60 hover:text-red-400 border border-red-400/20 hover:border-red-400/50 hover:bg-red-500/8"
           >
             {t('play.stop')}
           </Button>
         </div>
 
-        <div className="flex-1 flex items-center justify-center py-4">
+        <div className="flex-1 flex items-center justify-center py-4 pb-[15vh]">
           <div className="relative w-full">
             {deck.length > idx + 2 && (
               <div className="absolute inset-0 rounded-2xl bg-white/[0.04] border border-white/[0.06] translate-y-2 translate-x-1.5 scale-[0.96]" />

@@ -54,7 +54,7 @@ export function Card({
               className="inline-flex items-center bg-white/8 border border-white/10 rounded-full px-2.5 py-0.5 text-xs uppercase tracking-widest"
               style={{ color: categoryColor }}
             >
-              {question.category_id}
+              {t(`category.${question.category_id}.label`)}
             </span>
           </div>
 

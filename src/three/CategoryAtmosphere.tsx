@@ -11,9 +11,9 @@ const SHOCKWAVE_DURATION = 1.2;
 
 const QUADRANTS = [
   [0.32, 0.22],
-  [-0.28, -0.20],
-  [-0.30, 0.20],
-  [0.30, -0.22],
+  [-0.28, -0.2],
+  [-0.3, 0.2],
+  [0.3, -0.22],
 ] as const;
 
 interface ShapeProps {
@@ -39,7 +39,15 @@ function makeMat(color: string, opacity = 0.72) {
   });
 }
 
-function CategoryShape({ categoryId, active, index, total, shockwave, viewportWidth, viewportHeight }: ShapeProps) {
+function CategoryShape({
+  categoryId,
+  active,
+  index,
+  total,
+  shockwave,
+  viewportWidth,
+  viewportHeight,
+}: ShapeProps) {
   const groupRef = useRef<THREE.Group>(null);
   const visual = getCategoryVisual(categoryId);
   const [primary, secondary] = visual.palette;
@@ -51,7 +59,7 @@ function CategoryShape({ categoryId, active, index, total, shockwave, viewportWi
     if (!group) return;
 
     const t = clock.elapsedTime;
-    const targetOpacity = active ? (total > 1 ? 0.52 : 0.86) : 0;
+    const targetOpacity = active ? (total > 1 ? 0.42 : 0.68) : 0;
     const scale = active ? 2.2 + Math.sin(t * 1.7 + index) * 0.04 + shockwave * 0.16 : 0.74;
 
     const quad = QUADRANTS[index] ?? ([0.32, 0.22] as const);

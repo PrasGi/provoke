@@ -115,7 +115,8 @@
   "finished": {
     "title": "Session Complete",
     "cards_played": "You explored {{count}} questions",
-    "play_again": "Play Again"
+    "play_again": "Play Again",
+    "home": "Change Categories"
   },
   "lang": {
     "toggle": {

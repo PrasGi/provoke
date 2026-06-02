@@ -7,6 +7,7 @@ export function FinishedScreen() {
   const { t } = useTranslation();
   const state = useGameStore((s) => s.state);
   const replay = useGameStore((s) => s.replay);
+  const quit = useGameStore((s) => s.quit);
 
   if (state.screen !== 'finished') return null;
 
@@ -28,9 +29,19 @@ export function FinishedScreen() {
         </p>
       </div>
 
-      <Button type="button" onClick={replay} className="py-4 px-10 text-base">
-        {t('finished.play_again')}
-      </Button>
+      <div className="flex flex-col items-center gap-3">
+        <Button type="button" onClick={replay} className="py-4 px-10 text-base">
+          {t('finished.play_again')}
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={quit}
+          className="text-white/60 hover:text-white"
+        >
+          {t('finished.home')}
+        </Button>
+      </div>
     </div>
   );
 }
