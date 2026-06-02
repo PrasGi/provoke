@@ -16,19 +16,19 @@ describe('FinishedScreen', () => {
   });
 
   it('renders count in subtitle', () => {
-    useGameStore.setState({ state: { screen: 'finished', totalSeen: 15 } });
+    useGameStore.setState({ state: { screen: 'finished', totalSeen: 15, categoryCounts: {} } });
     render(<FinishedScreen />);
     expect(screen.getByText(/15/)).toBeTruthy();
   });
 
   it('renders replay button', () => {
-    useGameStore.setState({ state: { screen: 'finished', totalSeen: 5 } });
+    useGameStore.setState({ state: { screen: 'finished', totalSeen: 5, categoryCounts: {} } });
     render(<FinishedScreen />);
     expect(screen.getByRole('button', { name: /play again|main lagi/i })).toBeTruthy();
   });
 
   it('replay button calls replay action', () => {
-    useGameStore.setState({ state: { screen: 'finished', totalSeen: 5 } });
+    useGameStore.setState({ state: { screen: 'finished', totalSeen: 5, categoryCounts: {} } });
     render(<FinishedScreen />);
     fireEvent.click(screen.getByRole('button', { name: /play again|main lagi/i }));
     expect(useGameStore.getState().state.screen).toBe('home');

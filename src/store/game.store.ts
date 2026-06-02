@@ -76,7 +76,11 @@ export const useGameStore = create<GameStore>()(
         const { idx, deck, timerDur } = store.state;
         const nextIdx = idx + 1;
         if (nextIdx >= deck.length) {
-          store.state = { screen: 'finished', totalSeen: deck.length };
+          const categoryCounts = deck.reduce<Partial<Record<CategoryId, number>>>((acc, q) => {
+            acc[q.category_id] = (acc[q.category_id] ?? 0) + 1;
+            return acc;
+          }, {});
+          store.state = { screen: 'finished', totalSeen: deck.length, categoryCounts };
         } else {
           store.state.idx = nextIdx;
           store.state.phase = 'thinking';

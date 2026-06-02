@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '../components/Card';
 import { Timer } from '../components/Timer';
+import { ProgressBar } from '../components/ProgressBar';
 import { Button } from '../components/ui/button';
 import {
   Dialog,
@@ -14,6 +15,7 @@ import {
 import { useGameStore } from '../store/game.store';
 import { useTheme } from '../three/theme-context';
 import { readSettings } from '../store/persist';
+import { THEMES } from '../data/themes';
 
 export function PlayingScreen() {
   const { i18n, t } = useTranslation();
@@ -53,6 +55,7 @@ export function PlayingScreen() {
   const settings = readSettings();
   const reducedMotion = settings.reducedMotion;
   const isLastCard = idx === deck.length - 1;
+  const categoryColor = THEMES[currentCard.category_id]?.colorPrimary ?? 'oklch(0.72 0.13 70)';
 
   const handleStopConfirm = () => {
     setStopOpen(false);
@@ -61,7 +64,9 @@ export function PlayingScreen() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col px-4 py-4 max-w-2xl mx-auto">
+      <ProgressBar value={(idx + 1) / deck.length} color={categoryColor} />
+
+      <div className="min-h-screen flex flex-col px-4 py-4 max-w-2xl md:max-w-3xl mx-auto">
         <div className="flex items-center justify-between py-2">
           <span className="text-sm text-white/65 tabular-nums">
             {idx + 1} / {deck.length}

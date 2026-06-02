@@ -16,4 +16,4 @@ export type GameState =
       secs: number;
       running: boolean;
     }
-  | { screen: 'finished'; totalSeen: number };
+  | { screen: 'finished'; totalSeen: number; categoryCounts: Partial<Record<CategoryId, number>> };

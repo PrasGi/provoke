@@ -83,7 +83,7 @@ export function HomeScreen() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col items-center justify-start px-4 pt-6 pb-16 gap-6 max-w-xl mx-auto">
+      <div className="min-h-screen flex flex-col items-center justify-start px-4 pt-6 pb-32 gap-6 max-w-xl md:max-w-3xl mx-auto">
         <div className="w-full flex items-center justify-between">
           <Brand />
           <div className="flex items-center gap-2">
@@ -122,7 +122,7 @@ export function HomeScreen() {
                 type="button"
                 key={key}
                 onClick={() => setLevel(key)}
-                className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium ${
+                className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap ${
                   level === key
                     ? 'bg-gradient-to-b from-white/15 to-white/8 text-white border border-white/20 shadow-[0_0_12px_oklch(0.72_0.13_70_/_0.15)]'
                     : 'text-white/60 hover:text-white/85 hover:bg-white/6'
@@ -142,7 +142,7 @@ export function HomeScreen() {
                 type="button"
                 key={value}
                 onClick={() => setTimerDur(value)}
-                className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium ${
+                className={`provoke-button flex-1 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap ${
                   timerDur === value
                     ? 'bg-gradient-to-b from-white/15 to-white/8 text-white border border-white/20 shadow-[0_0_12px_oklch(0.72_0.13_70_/_0.15)]'
                     : 'text-white/60 hover:text-white/85 hover:bg-white/6'
@@ -153,25 +153,30 @@ export function HomeScreen() {
             ))}
           </div>
         </div>
-
-        {selected.length > 0 && (
-          <div className="-mt-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/8 text-xs text-white/50">
-              {t('home.cards_available', { count: availableCount })}
-            </span>
-          </div>
-        )}
-
-        <Button
-          type="button"
-          data-tutorial="gameplay"
-          className={`w-full py-5 text-base font-semibold ${canStart ? 'shadow-[0_0_28px_oklch(0.72_0.13_70_/_0.35)]' : ''}`}
-          disabled={!canStart}
-          onClick={handleStart}
-        >
-          {t('home.start')}
-        </Button>
       </div>
+
+      {/* Sticky Start bar — always visible at the bottom */}
+      <div className="fixed bottom-0 inset-x-0 z-20 pointer-events-none">
+        <div className="bg-gradient-to-t from-[oklch(0.08_0_0)] via-[oklch(0.08_0_0/0.92)] to-transparent px-4 pt-10 pb-6">
+          <div className="max-w-xl md:max-w-3xl mx-auto pointer-events-auto flex flex-col gap-2">
+            {selected.length > 0 && (
+              <p className="text-center text-xs text-white/45">
+                {t('home.cards_available', { count: availableCount })}
+              </p>
+            )}
+            <Button
+              type="button"
+              data-tutorial="gameplay"
+              className={`w-full py-5 text-base font-semibold ${canStart ? 'shadow-[0_0_28px_oklch(0.72_0.13_70_/_0.35)]' : ''}`}
+              disabled={!canStart}
+              onClick={handleStart}
+            >
+              {t('home.start')}
+            </Button>
+          </div>
+        </div>
+      </div>
+
       {showTutorial && <Tutorial onClose={handleTutorialClose} />}
     </>
   );
